@@ -1,14 +1,19 @@
 import { render, screen } from '@testing-library/react'
 import Home from '@/pages/index'
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+describe('Home Component', () => {
+  let container: HTMLElement;
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+  beforeEach(() => {
+    const { container: renderContainer } = render(<Home />);
+    container = renderContainer;
+  });
 
-    expect(heading).toBeInTheDocument()
-  })
+  it('renders without crash', () => {
+    expect(container)
+  });
+  it('should contain a SystemDescription component', () => {
+    const description = screen.getByTestId('SystemDescription-component');
+    expect(description).toBeInTheDocument();
+  });
 })
