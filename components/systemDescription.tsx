@@ -1,5 +1,5 @@
-export default function SystemDescription(){
+export default function SystemDescription({...props}){
     return <div data-testid="SystemDescription-component">
-        <p>Brief system description</p>
+        <p>{props.description}</p>
     </div>
 }

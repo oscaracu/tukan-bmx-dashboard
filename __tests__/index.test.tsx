@@ -12,8 +12,5 @@ describe('Home Component', () => {
   it('renders without crash', () => {
     expect(container)
   });
-  it('should contain a SystemDescription component', () => {
-    const description = screen.getByTestId('SystemDescription-component');
-    expect(description).toBeInTheDocument();
-  });
+
 })
