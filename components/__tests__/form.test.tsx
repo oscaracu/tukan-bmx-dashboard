@@ -1,13 +1,18 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Form from '../form';
 
-describe('Button Component', () => {
+describe('Form Component', () => {
 
   let container: HTMLElement;
-  let formElement: HTMLElement;
+  let formElement: HTMLFormElement;
   const props = {
     formTitle: "My Form",
-    description: "Aut quia ut facilis necessitatibus sed fugiat."
+    description: "Aut quia ut facilis necessitatibus sed fugiat.",
+    seriesOptions: [
+      { value: 'series1', label: 'Data series 1' },
+      { value: 'series2', label: 'Data series 2' },
+      { value: 'series3', label: 'Data series 3' },
+    ]
   }
 
   beforeEach(() => {
@@ -47,5 +52,59 @@ describe('Button Component', () => {
     expect(formElement).toContainElement(inputElement);
   });
 
+  it('should render two input elements of type radio with values "english" and "spanish" and the same name attribute', () => {
+    const languageRadioButtons: any = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'language');
+    expect(languageRadioButtons.length).toBe(2);
+
+    const [englishRadioButton, spanishRadioButton] = languageRadioButtons;
+    expect(englishRadioButton.value).toBe('english');
+    expect(spanishRadioButton.value).toBe('spanish');
+
+    const englishLabel = formElement.querySelector(`label[for="${englishRadioButton.id}"]`);
+    const spanishLabel = formElement.querySelector(`label[for="${spanishRadioButton.id}"]`);
+
+    expect(englishLabel).toBeInTheDocument();
+    expect(englishLabel).toHaveTextContent('english');
+    expect(spanishLabel).toBeInTheDocument();
+    expect(spanishLabel).toHaveTextContent('spanish');
+  });
+
+  it('should render all language radio buttons within a fieldset with legend "Language"', () => {
+    const fieldsetElement = screen.getByTestId('language-fieldset');
+    const legendElement = screen.getByText("Language");
+
+    expect(legendElement.tagName).toBe("LEGEND");
+    expect(fieldsetElement).toBeInTheDocument();
+    expect(fieldsetElement.tagName).toBe('FIELDSET');
+    expect(fieldsetElement).toContainElement(legendElement);
+
+    const languageRadioButtons = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'language');
+    expect(languageRadioButtons.length).toBe(2);
+
+    languageRadioButtons.forEach(radioButton => {
+      expect(radioButton).toBeInTheDocument();
+      expect(fieldsetElement).toContainElement(radioButton);
+    });
+  });
+
+    it('should render a select element with label "Choose a data series"', () => {
+    const selectElement = screen.getByLabelText('Choose a data series');
+
+    expect(selectElement).toBeInTheDocument();
+    expect(selectElement).toHaveAttribute('name', 'series');
+    expect(formElement).toContainElement(selectElement);
+  });
+
+  it('should render the "Choose a data series" select element with options received by props', () => {
+    const selectElement = screen.getByLabelText('Choose a data series');
+    const optionElements = selectElement.querySelectorAll('option');
+
+    expect(optionElements.length).toBe(props.seriesOptions.length);
+
+    props.seriesOptions.forEach((option, index) => {
+      expect(optionElements[index]).toHaveAttribute('value', option.value);
+      expect(optionElements[index]).toHaveTextContent(option.label);
+    });
+  });
 
 })
