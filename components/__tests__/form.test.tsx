@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Form from '../form';
 
 describe('Form Component', () => {
@@ -16,7 +16,7 @@ describe('Form Component', () => {
   }
 
   beforeEach(() => {
-    const { container: renderContainer } = render(<Form {...props}/>);
+    const { container: renderContainer } = render(<Form {...props} />);
     container = renderContainer;
     formElement = screen.getByTestId('form');
   });
@@ -87,7 +87,7 @@ describe('Form Component', () => {
     });
   });
 
-    it('should render a select element with label "Choose a data series"', () => {
+  it('should render a select element with label "Choose a data series"', () => {
     const selectElement = screen.getByLabelText('Choose a data series');
 
     expect(selectElement).toBeInTheDocument();
@@ -142,6 +142,11 @@ describe('Form Component', () => {
     });
   });
 
+  it('should have the "Table" radio button selected by default', () => {
+    const tableRadio = screen.getByLabelText('Table') as HTMLInputElement;
+    expect(tableRadio.checked).toBe(true);
+  });
+
   it('should render an date type input element with label "Initial date" and id "init-date"', () => {
     const inputElement = screen.getByLabelText('Initial date');
     expect(inputElement).toBeInTheDocument();
@@ -160,5 +165,19 @@ describe('Form Component', () => {
     expect(formElement).toContainElement(inputElement);
   });
 
+
+  it('should render GraphOptions component when "Graph" radio button is selected', () => {
+    const graphRadio = screen.getByLabelText('Graph');
+    fireEvent.click(graphRadio);
+
+    expect(formElement).toContainElement(screen.getByTestId('graph-options-fieldset'));
+  });
+
+  it('should render TableOptions component when "Table" radio button is selected', () => {
+    const tableRadio = screen.getByLabelText('Table');
+    fireEvent.click(tableRadio);
+
+    expect(formElement).toContainElement(screen.getByTestId('table-options-fieldset'));
+  });
 
 })

@@ -31,10 +31,22 @@ describe('Graph Options form fields', () => {
         expect(fieldsetElement).toContainElement(legendElement);
     })
 
-    it('should contain a select element with name and testId "graph-options"', () => {
-        const selectElement = screen.getByTestId("graph-options");
+    it('should contain a select element with name and testId "graph-types"', () => {
+        const selectElement = screen.getByTestId("graph-types");
 
-        expect(selectElement).toHaveAttribute("name", "graph-options")
+        expect(selectElement).toHaveAttribute("name", "graph-types")
+    });
+
+    it('should render the "graph-types" select element with options received by props', () => {
+        const selectElement = screen.getByTestId('graph-types');
+        const optionElements = selectElement.querySelectorAll('option');
+
+        expect(optionElements.length).toBe(props.typeOptions.length);
+
+        props.typeOptions.forEach((option, index) => {
+            expect(optionElements[index]).toHaveAttribute('value', option.value);
+            expect(optionElements[index]).toHaveTextContent(option.label);
+        });
     });
 
     it('should contain a color type input with "Color" label', () => {
