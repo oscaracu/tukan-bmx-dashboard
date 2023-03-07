@@ -12,7 +12,19 @@ describe('Form Component', () => {
       { value: 'series1', label: 'Data series 1' },
       { value: 'series2', label: 'Data series 2' },
       { value: 'series3', label: 'Data series 3' },
-    ]
+    ],
+    typeOptions: [
+      { value: "type1", label: "Graph type 1" },
+      { value: "type2", label: "Graph type 2" },
+      { value: "type3", label: "Graph type 3" }
+    ],
+    formatOptions: [
+      { value: "fotmat1", label: "Format 1" },
+      { value: "fotmat2", label: "Format 2" },
+      { value: "fotmat3", label: "Format 3" }
+    ],
+    clickHandle: jest.fn(),
+    submitHandle: jest.fn()
   }
 
   beforeEach(() => {
@@ -178,6 +190,39 @@ describe('Form Component', () => {
     fireEvent.click(tableRadio);
 
     expect(formElement).toContainElement(screen.getByTestId('table-options-fieldset'));
+  });
+
+  it('should include a button with text "Cancel"', () => {
+    const cancelButton = screen.getByTestId("cancel-btn");
+
+    expect(cancelButton).toHaveTextContent("Cancel")
+    expect(cancelButton.tagName).toBe("BUTTON");
+  });
+
+  it('button "Cancel" should call a function on mouse click', () => {
+    const cancelButton = screen.getByTestId("cancel-btn");
+    fireEvent.click(cancelButton);
+    expect(props.clickHandle).toHaveBeenCalled();
+  });
+
+  it('should include a button with text "Generate"', () => {
+    const generateButton = screen.getByTestId("generate-btn");
+
+    expect(generateButton).toHaveTextContent("Generate")
+    expect(generateButton.tagName).toBe("BUTTON");
+  });
+
+  it('button "Generate" should be "submit" type', () => {
+    const generateButton = screen.getByTestId("generate-btn");
+
+    expect(generateButton).toHaveAttribute("type", "submit");
+  });
+
+  it('button "Generate" should call Form submitHandle function on mouse click ', () => {
+    const generateButton = screen.getByTestId("generate-btn");
+    fireEvent.click(generateButton);
+
+    expect(props.submitHandle).toHaveBeenCalled();
   });
 
 })

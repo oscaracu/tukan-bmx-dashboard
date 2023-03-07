@@ -1,5 +1,6 @@
 import selectOptions from "models/selectOptions";
-import { useState } from "react";
+import { ReactEventHandler, useState } from "react";
+import Button from "./button";
 import GraphOptions from "./graphOptions";
 import TableOptions from "./tableOptions";
 
@@ -11,32 +12,22 @@ function Form({ ...props }) {
 
     let extraOptions;
 
-    // Temporary props for extraOptions
-
-    const tempProps = {
-        typeOptions: [
-            { value: "type1", label: "Graph type 1" },
-            { value: "type2", label: "Graph type 2" },
-            { value: "type3", label: "Graph type 3" }
-        ],
-        formatOptions: [
-            { value: "fotmat1", label: "Format 1" },
-            { value: "fotmat2", label: "Format 2" },
-            { value: "fotmat3", label: "Format 3" }
-        ]
+    if (visualizationType === 0) {
+        extraOptions = <TableOptions formatOptions={props.formatOptions} />
+    } else {
+        extraOptions = <GraphOptions typeOptions={props.typeOptions} />
     }
 
-    if (visualizationType === 0) {
-        extraOptions = <TableOptions formatOptions={tempProps.formatOptions} />
-    } else {
-        extraOptions = <GraphOptions typeOptions={tempProps.typeOptions} />
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        props.submitHandle();
     }
 
     return (
         <>
             <h1>{props.formTitle}</h1>
             <p data-testid="form-description">{props.description}</p>
-            <form data-testid="form">
+            <form data-testid="form" onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input type="text" name="title" id="title" />
                 <fieldset data-testid="language-fieldset">
@@ -54,6 +45,9 @@ function Form({ ...props }) {
                 <label htmlFor="init-date">Initial date</label><input type="date" name="init-date" id="init-date" />
                 <label htmlFor="end-date">End date</label><input type="date" name="end-date" id="end-date" />
                 {extraOptions}
+                <Button clickHandle={props.clickHandle} text="Cancel" testId="cancel-btn" btnType="button" />
+                <Button text="Generate" testId="generate-btn" btnType="submit" />
+
 
             </form>
         </>
