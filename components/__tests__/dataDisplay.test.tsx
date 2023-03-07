@@ -3,9 +3,12 @@ import DataDisplay from "../dataDisplay";
 
 describe('DataDisplay Component', () => {
     let container: HTMLElement;
+    const props = {
+        data: "Series Data received by props"
+    }
 
     beforeEach(() => {
-        const { container: renderContainer } = render(<DataDisplay />);
+        const { container: renderContainer } = render(<DataDisplay {...props} />);
         container = renderContainer;
     });
 
@@ -17,5 +20,11 @@ describe('DataDisplay Component', () => {
         const divElement = screen.getByTestId("data-display");
 
         expect(divElement.tagName).toBe("DIV");
+    });
+
+    it('should render a data passed by props', () => {
+        const divElement = screen.getByTestId("data-display");
+
+        expect(divElement).toHaveTextContent(props.data)
     });
 });

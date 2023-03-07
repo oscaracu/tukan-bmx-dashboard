@@ -1,7 +1,7 @@
 function DataDisplay({ ...props }) {
     return (
         <div data-testid="data-display">
-            Muestra una tabla o una grafica.
+            {props.data}
         </div>);
 }
 
