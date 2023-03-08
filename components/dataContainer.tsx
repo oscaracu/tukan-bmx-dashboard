@@ -9,7 +9,14 @@ interface DataItems {
 
 function DataCointainer({ ...props }) {
 
-    const dataItems = props.dataItems.map((item: DataItems, index: number) => <DataItem key={index} seriesTitle={item.seriesTitle} data={item.data} dataActions={props.dataActions} />)
+    let dataItems;
+
+    if (!props.dataItems) {
+        dataItems = null;
+    } else {
+        dataItems = props.dataItems.map((item: DataItems, index: number) => <DataItem key={index} seriesTitle={item.seriesTitle} data={item.data} dataActions={props.dataActions} />)
+    }
+
 
     return (
         <section data-testid="data-container">
