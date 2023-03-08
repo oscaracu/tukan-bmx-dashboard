@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import Home from '@/pages/index'
 
 describe('Home Component', () => {
@@ -34,11 +34,43 @@ describe('Home Component', () => {
 
   });
 
-  it('should contain the Modal Component', () => {
+  it('should render the Modal Component when "Add new" botton is pressed', () => {
 
-    const modalContainer = screen.getByTestId("modal");
+    const btnElement = screen.getByTestId("add-btn");
 
-    expect(modalContainer).toBeInTheDocument();
+    fireEvent.click(btnElement);
+
+    const modalComponent = screen.getByTestId("modal");
+
+    expect(modalComponent).toBeInTheDocument();
+
+  });
+
+  it('should render Form component into Modal Component when "Add new" botton is pressed', () => {
+
+    const btnElement = screen.getByTestId("add-btn");
+
+    fireEvent.click(btnElement);
+
+    const formElement = screen.getByTestId("form");
+
+    expect(formElement).toBeInTheDocument();
+
+  });
+
+  it('should unmount Modal component when Form "Cancel" button is pressed', () => {
+
+    const btnElement = screen.getByTestId("add-btn");
+
+    fireEvent.click(btnElement);
+
+    const modalComponent = screen.getByTestId("modal");
+
+    const cancelButton = screen.getByTestId("cancel-btn");
+
+    fireEvent.click(cancelButton);
+
+    expect(modalComponent).not.toBeInTheDocument();
 
   });
 
