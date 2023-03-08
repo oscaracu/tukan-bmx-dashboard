@@ -9,7 +9,7 @@ interface DataAction {
 
 function ActionButtons({ ...props }) {
 
-    const actionBtns = props.dataActions.map((action: DataAction, index: number) => <Button btnType={action.btnType} testId={action.testId} text={action.text} clickHandle={action.clickHandle} />)
+    const actionBtns = props.dataActions.map((action: DataAction, index: number) => <Button key={index} btnType={action.btnType} testId={action.testId} text={action.text} clickHandle={action.clickHandle} />)
 
     return (
         <div data-testid="action-buttons">
