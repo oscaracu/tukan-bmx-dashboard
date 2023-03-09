@@ -76,9 +76,9 @@ describe('Form Component', () => {
     const spanishLabel = formElement.querySelector(`label[for="${spanishRadioButton.id}"]`);
 
     expect(englishLabel).toBeInTheDocument();
-    expect(englishLabel).toHaveTextContent('english');
+    expect(englishLabel).toHaveTextContent('English');
     expect(spanishLabel).toBeInTheDocument();
-    expect(spanishLabel).toHaveTextContent('spanish');
+    expect(spanishLabel).toHaveTextContent('Spanish');
   });
 
   it('should render all language radio buttons within a fieldset with legend "Language"', () => {
@@ -98,6 +98,12 @@ describe('Form Component', () => {
       expect(fieldsetElement).toContainElement(radioButton);
     });
   });
+
+  it('should have the "English" radio button selected by default', () => {
+    const tableRadio = screen.getByLabelText('English') as HTMLInputElement;
+    expect(tableRadio.checked).toBe(true);
+  });
+
 
   it('should render a select element with label "Choose a data series"', () => {
     const selectElement = screen.getByLabelText('Choose a data series');
@@ -224,5 +230,6 @@ describe('Form Component', () => {
 
     expect(props.submitHandle).toHaveBeenCalled();
   });
+
 
 })

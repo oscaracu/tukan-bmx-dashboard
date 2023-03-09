@@ -32,7 +32,7 @@ function Form({ ...props }) {
                 <input type="text" name="title" id="title" />
                 <fieldset data-testid="language-fieldset">
                     <legend>Language</legend>
-                    <input type="radio" name="language" id="english" value="english" /><label htmlFor="english">english</label><input type="radio" name="language" id="spanish" value="spanish" /><label htmlFor="spanish">spanish</label>
+                    <input type="radio" name="language" id="english" value="english" defaultChecked /><label htmlFor="english">English</label><input type="radio" name="language" id="spanish" value="spanish" /><label htmlFor="spanish">Spanish</label>
                 </fieldset>
                 <label htmlFor="series">Choose a data series</label>
                 <select name="series" id="series">
