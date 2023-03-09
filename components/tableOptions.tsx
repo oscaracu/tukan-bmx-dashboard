@@ -8,7 +8,7 @@ function TableOptions({ ...props }) {
         <fieldset data-testid="table-options-fieldset">
             <legend>Table options</legend>
             <label htmlFor="decimals">Decimals</label><input type="number" name="decimals" id="decimals" />
-            <select name="date-format" id="date-format" data-testid="date-format">
+            <label htmlFor="date-format">Date format</label><select name="date-format" id="date-format" data-testid="date-format">
                 {formatOptions}
             </select>
         </fieldset></>);

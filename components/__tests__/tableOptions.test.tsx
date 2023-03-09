@@ -38,10 +38,12 @@ describe("Table Options form fields", () => {
         expect(decimalsInput).toHaveAttribute("id", "decimals")
     })
 
-    it("should contain a input select with testId 'date-format' and name attribute 'date-format'", () => {
-        const dateSelect = screen.getByTestId("date-format");
+    it("should contain a input select with 'Date format' label and name attribute 'date-format'", () => {
+        const dateSelect = screen.getByLabelText("Date format");
 
+        expect(dateSelect.tagName).toBe("SELECT");
         expect(dateSelect).toHaveAttribute("name", "date-format");
+
     })
 
     it('should render the "date-format" select element with options received by props', () => {
