@@ -126,7 +126,7 @@ describe('Form Component', () => {
   });
 
   it('should render two input elements of type radio with values "Table" and "Graph" and the same name attribute', () => {
-    const visualizationRadioButtons: any = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'visualization-type');
+    const visualizationRadioButtons: any = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'visualizationType');
     expect(visualizationRadioButtons.length).toBe(2);
 
     const [tableRadioButton, graphRadioButton] = visualizationRadioButtons;
@@ -151,7 +151,7 @@ describe('Form Component', () => {
     expect(fieldsetElement.tagName).toBe('FIELDSET');
     expect(fieldsetElement).toContainElement(legendElement);
 
-    const visualizationRadioButtons = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'visualization-type');
+    const visualizationRadioButtons = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'visualizationType');
     expect(visualizationRadioButtons.length).toBe(2);
 
     visualizationRadioButtons.forEach(radioButton => {
@@ -165,20 +165,20 @@ describe('Form Component', () => {
     expect(tableRadio.checked).toBe(true);
   });
 
-  it('should render an date type input element with label "Initial date" and id "init-date"', () => {
+  it('should render an date type input element with label "Initial date" and id "initDate"', () => {
     const inputElement = screen.getByLabelText('Initial date');
     expect(inputElement).toBeInTheDocument();
     expect(inputElement.tagName).toBe('INPUT');
-    expect(inputElement).toHaveAttribute('id', 'init-date');
+    expect(inputElement).toHaveAttribute('id', 'initDate');
     expect(inputElement).toHaveAttribute('type', 'date');
     expect(formElement).toContainElement(inputElement);
   });
 
-  it('should render an date type input element with label "End date" and id "end-date"', () => {
+  it('should render an date type input element with label "End date" and id "endDate"', () => {
     const inputElement = screen.getByLabelText('End date');
     expect(inputElement).toBeInTheDocument();
     expect(inputElement.tagName).toBe('INPUT');
-    expect(inputElement).toHaveAttribute('id', 'end-date');
+    expect(inputElement).toHaveAttribute('id', 'endDate');
     expect(inputElement).toHaveAttribute('type', 'date');
     expect(formElement).toContainElement(inputElement);
   });

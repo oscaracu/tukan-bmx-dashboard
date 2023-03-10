@@ -38,16 +38,16 @@ describe("Table Options form fields", () => {
         expect(decimalsInput).toHaveAttribute("id", "decimals")
     })
 
-    it("should contain a input select with 'Date format' label and name attribute 'date-format'", () => {
+    it("should contain a input select with 'Date format' label and name attribute 'dateFormat'", () => {
         const dateSelect = screen.getByLabelText("Date format");
 
         expect(dateSelect.tagName).toBe("SELECT");
-        expect(dateSelect).toHaveAttribute("name", "date-format");
+        expect(dateSelect).toHaveAttribute("name", "dateFormat");
 
     })
 
-    it('should render the "date-format" select element with options received by props', () => {
-        const selectElement = screen.getByTestId('date-format');
+    it('should render the "dateFormat" select element with options received by props', () => {
+        const selectElement = screen.getByTestId('dateFormat');
         const optionElements = selectElement.querySelectorAll('option');
 
         expect(optionElements.length).toBe(props.formatOptions.length);
@@ -59,10 +59,10 @@ describe("Table Options form fields", () => {
     });
 
 
-    it("fieldset 'Table Options' must cointain the 'decimals' input and 'date-format' select", () => {
+    it("fieldset 'Table Options' must cointain the 'decimals' input and 'dateFormat' select", () => {
         const fieldsetElement = screen.getByTestId('table-options-fieldset');
         const decimalsInput = screen.getByLabelText("Decimals");
-        const dateSelect = screen.getByTestId("date-format");
+        const dateSelect = screen.getByTestId("dateFormat");
 
         expect(fieldsetElement).toContainElement(decimalsInput);
         expect(fieldsetElement).toContainElement(dateSelect);

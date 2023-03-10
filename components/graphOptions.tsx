@@ -7,7 +7,7 @@ function GraphOptions({ ...props }) {
     return (<>
         <fieldset data-testid="graph-options-fieldset">
             <legend>Graph options</legend>
-            <select name="graph-types" id="graph-types" data-testid="graph-types">
+            <select name="graphType" id="graphType" data-testid="graphType">
                 {typeOptions}
             </select>
             <label htmlFor="color">Color</label><input type="color" name="color" id="color" />

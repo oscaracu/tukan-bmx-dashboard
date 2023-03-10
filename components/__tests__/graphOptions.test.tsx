@@ -31,14 +31,14 @@ describe('Graph Options form fields', () => {
         expect(fieldsetElement).toContainElement(legendElement);
     })
 
-    it('should contain a select element with name and testId "graph-types"', () => {
-        const selectElement = screen.getByTestId("graph-types");
+    it('should contain a select element with name and testId "graphType"', () => {
+        const selectElement = screen.getByTestId("graphType");
 
-        expect(selectElement).toHaveAttribute("name", "graph-types")
+        expect(selectElement).toHaveAttribute("name", "graphType")
     });
 
     it('should render the "graph-types" select element with options received by props', () => {
-        const selectElement = screen.getByTestId('graph-types');
+        const selectElement = screen.getByTestId('graphType');
         const optionElements = selectElement.querySelectorAll('option');
 
         expect(optionElements.length).toBe(props.typeOptions.length);
@@ -55,10 +55,10 @@ describe('Graph Options form fields', () => {
         expect(inputElement).toHaveAttribute("type", "color");
     });
 
-    it("fieldset 'Graph options' must cointain the 'Color' input and 'graph-types' select", () => {
+    it("fieldset 'Graph options' must cointain the 'Color' input and 'graphType' select", () => {
         const fieldsetElement = screen.getByTestId('graph-options-fieldset');
         const decimalsInput = screen.getByLabelText("Color");
-        const dateSelect = screen.getByTestId("graph-types");
+        const dateSelect = screen.getByTestId("graphType");
 
         expect(fieldsetElement).toContainElement(decimalsInput);
         expect(fieldsetElement).toContainElement(dateSelect);

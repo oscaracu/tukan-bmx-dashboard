@@ -1,8 +1,31 @@
 import selectOptions from "models/selectOptions";
-import { ReactEventHandler, useState } from "react";
+import { useState } from "react";
 import Button from "./button";
 import GraphOptions from "./graphOptions";
 import TableOptions from "./tableOptions";
+import {
+    Formik,
+    FormikHelpers,
+    FormikProps,
+    Form as FormikForm,
+    Field,
+    FieldProps,
+} from 'formik';
+
+interface FormValues {
+    title: string;
+    language: string;
+    series: string;
+    visualizationType: string;
+    initDate: string;
+    endDate: string;
+    decimals: number;
+    dateFormat: string;
+    grapType: string;
+    color: string;
+
+}
+
 
 function Form({ ...props }) {
 
@@ -40,10 +63,10 @@ function Form({ ...props }) {
                 </select>
                 <fieldset data-testid="visualization-fieldset">
                     <legend>Choose type of visualization</legend>
-                    <input type="radio" name="visualization-type" id="table" value="table" defaultChecked onClick={() => setVisualizationType(0)} /><label htmlFor="table">Table</label><input type="radio" name="visualization-type" id="graph" value="graph" onClick={() => setVisualizationType(1)} /><label htmlFor="graph">Graph</label>
+                    <input type="radio" name="visualizationType" id="table" value="table" defaultChecked onClick={() => setVisualizationType(0)} /><label htmlFor="table">Table</label><input type="radio" name="visualizationType" id="graph" value="graph" onClick={() => setVisualizationType(1)} /><label htmlFor="graph">Graph</label>
                 </fieldset>
-                <label htmlFor="init-date">Initial date</label><input type="date" name="init-date" id="init-date" />
-                <label htmlFor="end-date">End date</label><input type="date" name="end-date" id="end-date" />
+                <label htmlFor="initDate">Initial date</label><input type="date" name="initDate" id="initDate" />
+                <label htmlFor="endDate">End date</label><input type="date" name="endDate" id="endDate" />
                 {extraOptions}
                 <Button clickHandle={props.clickHandle} text="Cancel" testId="cancel-btn" btnType="button" />
                 <Button text="Generate" testId="generate-btn" btnType="submit" />
