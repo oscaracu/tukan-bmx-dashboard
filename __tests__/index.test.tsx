@@ -5,9 +5,13 @@ describe('Home Component', () => {
 
   let container: HTMLElement;
 
+  const props = {
+    submitHandler: jest.fn()
+  }
+
   beforeEach(() => {
 
-    const { container: renderContainer } = render(<Home />);
+    const { container: renderContainer } = render(<Home {...props} />);
     container = renderContainer;
 
   });
@@ -71,6 +75,47 @@ describe('Home Component', () => {
     fireEvent.click(cancelButton);
 
     expect(modalComponent).not.toBeInTheDocument();
+
+  });
+
+  it('should call a funtion when the Form "Generate" button is pressed', () => {
+
+    const addNewButton = screen.getByTestId("add-btn");
+
+    fireEvent.click(addNewButton);
+
+    const generateButton = screen.getByTestId("generate-btn");
+
+    fireEvent.click(generateButton);
+
+    expect(props.submitHandler).toHaveBeenCalled();
+
+
+  });
+
+  it('should render a new Data item with data from the Form when "Generate" button is pressed', () => {
+
+    const addNewButton = screen.getByTestId("add-btn");
+
+    fireEvent.click(addNewButton);
+
+    const titleInput = screen.getByLabelText("Title");
+    const seriesSelect = screen.getByTestId("series-select");
+    const initialDateInput = screen.getByLabelText("Initial date");
+    const endDateInput = screen.getByLabelText("End date");
+    const decimalsInput = screen.getByLabelText("Decimals");
+    const generateButton = screen.getByTestId("generate-btn");
+
+    fireEvent.change(titleInput, { target: { value: "Title Example 1" } });
+    fireEvent.change(seriesSelect, { target: { value: "Data series 2" } });
+    fireEvent.change(initialDateInput, { target: { value: "2020-01-01" } });
+    fireEvent.change(endDateInput, { target: { value: "2021-01-01" } });
+    fireEvent.change(decimalsInput, { target: { value: 2 } });
+    fireEvent.click(generateButton);
+
+    const dataItem = screen.getByText("Title Example 1");
+
+    expect(dataItem).toBeInTheDocument();
 
   });
 

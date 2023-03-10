@@ -35,7 +35,7 @@ function Form({ ...props }) {
                     <input type="radio" name="language" id="english" value="english" defaultChecked /><label htmlFor="english">English</label><input type="radio" name="language" id="spanish" value="spanish" /><label htmlFor="spanish">Spanish</label>
                 </fieldset>
                 <label htmlFor="series">Choose a data series</label>
-                <select name="series" id="series">
+                <select name="series" id="series" data-testid="series-select">
                     {seriesOptions}
                 </select>
                 <fieldset data-testid="visualization-fieldset">

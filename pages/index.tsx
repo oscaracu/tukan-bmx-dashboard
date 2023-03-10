@@ -5,25 +5,10 @@ import Modal from "@/components/modal";
 import SystemDescription from "@/components/systemDescription";
 import { useState } from "react";
 
-export default function Home() {
+export default function Home({ ...props }) {
 
   const [modal, setModal] = useState({ isActive: false, component: <SystemDescription /> });
-
-  const dataItems = [
-    {
-      seriesTitle: "Visualization Series Title 1",
-      data: "Series Data received by props 1",
-    },
-    {
-      seriesTitle: "Visualization Series Title 2",
-      data: "Series Data received by props 2",
-    },
-    {
-      seriesTitle: "Visualization Series Title 3",
-      data: "Series Data received by props 3",
-    },
-
-  ];
+  const [dataItems, setDataItems] = useState([{ seriesTitle: "Example Title", data: "Series Data" }]);
 
   const dataActions = [
     {
@@ -81,7 +66,7 @@ export default function Home() {
     { value: "fotmat3", label: "Format 3" }
   ];
 
-  const addNewBtnClickHandle = () => { setModal({ isActive: true, component: <Form seriesOptions={seriesOptions} formatOptions={formatOptions} typeOptions={typeOptions} clickHandle={cancelBtnClickHandle} /> }) }
+  const addNewBtnClickHandle = () => { setModal({ isActive: true, component: <Form seriesOptions={seriesOptions} formatOptions={formatOptions} typeOptions={typeOptions} clickHandle={cancelBtnClickHandle} submitHandle={props.submitHandler} /> }) }
 
   const cancelBtnClickHandle = () => { setModal(oldValues => { return { ...oldValues, isActive: false } }) };
 
