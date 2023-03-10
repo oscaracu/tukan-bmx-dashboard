@@ -5,13 +5,9 @@ describe('Home Component', () => {
 
   let container: HTMLElement;
 
-  const props = {
-    submitHandler: jest.fn()
-  }
-
   beforeEach(() => {
 
-    const { container: renderContainer } = render(<Home {...props} />);
+    const { container: renderContainer } = render(<Home />);
     container = renderContainer;
 
   });
@@ -78,21 +74,6 @@ describe('Home Component', () => {
 
   });
 
-  it('should call a funtion when the Form "Generate" button is pressed', () => {
-
-    const addNewButton = screen.getByTestId("add-btn");
-
-    fireEvent.click(addNewButton);
-
-    const generateButton = screen.getByTestId("generate-btn");
-
-    fireEvent.click(generateButton);
-
-    expect(props.submitHandler).toHaveBeenCalled();
-
-
-  });
-
   it('should render a new Data item with data from the Form when "Generate" button is pressed', () => {
 
     const addNewButton = screen.getByTestId("add-btn");
@@ -116,6 +97,22 @@ describe('Home Component', () => {
     const dataItem = screen.getByText("Title Example 1");
 
     expect(dataItem).toBeInTheDocument();
+
+  });
+
+  it('should unmount Modal component when Form "Generate" button is pressed', () => {
+
+    const btnElement = screen.getByTestId("add-btn");
+
+    fireEvent.click(btnElement);
+
+    const modalComponent = screen.getByTestId("modal");
+
+    const generateButton = screen.getByTestId("generate-btn");
+
+    fireEvent.click(generateButton);
+
+    expect(modalComponent).not.toBeInTheDocument();
 
   });
 

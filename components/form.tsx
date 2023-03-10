@@ -20,7 +20,7 @@ function Form({ ...props }) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        props.submitHandle();
+        props.submitHandle({ seriesTitle: "Title Example 1", data: "Series Data 2" });
     }
 
     return (
