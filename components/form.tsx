@@ -15,7 +15,8 @@ import { FormValues } from "../models/FormValues";
 import uniqid from 'uniqid';
 
 function Form({ ...props }) {
-    const formInitialValues: FormValues = {
+
+    const formInitialValues: FormValues = props.data ? props.data : {
         id: uniqid(),
         title: "",
         language: "english",
@@ -47,13 +48,6 @@ function Form({ ...props }) {
         extraOptions = <GraphOptions typeOptions={props.typeOptions} />;
     }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        props.submitHandle({
-            seriesTitle: "Title Example 1",
-            data: "Series Data 2",
-        });
-    };
 
     return (
         <>
@@ -63,7 +57,6 @@ function Form({ ...props }) {
             <Formik
                 initialValues={formInitialValues}
                 onSubmit={(values) => {
-                    // console.log({ values });
                     props.submitHandle(values);
 
                 }}
@@ -118,7 +111,8 @@ function Form({ ...props }) {
                         testId="cancel-btn"
                         btnType="button"
                     />
-                    <Button text="Generate" testId="generate-btn" btnType="submit" />
+                    {props.data ? <Button text="Save" testId="save-btn" btnType="submit" /> : <Button text="Generate" testId="generate-btn" btnType="submit" />}
+
                 </FormikForm>
 
             </Formik>

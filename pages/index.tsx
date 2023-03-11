@@ -7,6 +7,27 @@ import { FormValues } from "models/FormValues";
 import { useState } from "react";
 
 export default function Home() {
+
+
+  const seriesOptions = [
+    { value: "series1", label: "Data series 1" },
+    { value: "series2", label: "Data series 2" },
+    { value: "series3", label: "Data series 3" },
+  ];
+
+  const typeOptions = [
+    { value: "type1", label: "Graph type 1" },
+    { value: "type2", label: "Graph type 2" },
+    { value: "type3", label: "Graph type 3" },
+  ];
+
+  const formatOptions = [
+    { value: "fotmat1", label: "Format 1" },
+    { value: "fotmat2", label: "Format 2" },
+    { value: "fotmat3", label: "Format 3" },
+  ];
+
+
   const [modal, setModal] = useState({
     isActive: false,
     component: <SystemDescription />,
@@ -30,7 +51,41 @@ export default function Home() {
       testId: "edit-action",
       text: "Edit",
       btnType: "button",
-      clickHandle: () => console.log("Edit"),
+      clickHandle: (id: string) => {
+
+        const itemIndex = dataItems.findIndex((item: FormValues) => item.id === id);
+
+        function updateItem(data: FormValues) {
+
+          setDataItems(dataItems.map((element, index) => {
+
+            if (index === itemIndex) {
+
+              return data;
+
+            }
+
+            return element;
+
+          }));
+
+        }
+
+        setModal({
+          isActive: true,
+          component: (
+            <Form
+              seriesOptions={seriesOptions}
+              formatOptions={formatOptions}
+              typeOptions={typeOptions}
+              clickHandle={cancelBtnClickHandle}
+              submitHandle={updateItem}
+              data={dataItems[itemIndex]}
+            />
+          ),
+        });
+
+      },
     },
     {
       testId: "delete-action",
@@ -46,24 +101,6 @@ export default function Home() {
       btnType: "button",
       clickHandle: () => console.log("Download"),
     },
-  ];
-
-  const seriesOptions = [
-    { value: "series1", label: "Data series 1" },
-    { value: "series2", label: "Data series 2" },
-    { value: "series3", label: "Data series 3" },
-  ];
-
-  const typeOptions = [
-    { value: "type1", label: "Graph type 1" },
-    { value: "type2", label: "Graph type 2" },
-    { value: "type3", label: "Graph type 3" },
-  ];
-
-  const formatOptions = [
-    { value: "fotmat1", label: "Format 1" },
-    { value: "fotmat2", label: "Format 2" },
-    { value: "fotmat3", label: "Format 3" },
   ];
 
   const addNewBtnClickHandle = () => {

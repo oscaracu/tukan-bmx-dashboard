@@ -173,4 +173,51 @@ describe('Home Component', () => {
     expect(dataItem).not.toBeInTheDocument()
   });
 
+  it('should update a Data item after Edit button is pressed and data changed on the Form', async () => {
+    const addNewButton = screen.getByTestId("add-btn");
+    const user = userEvent.setup();
+
+    await act(async () => {
+      await user.click(addNewButton);
+    });
+
+
+    const titleInput = await screen.findByLabelText("Title");
+    const seriesSelect = await screen.findByTestId("series-select");
+    const initialDateInput = await screen.findByLabelText("Initial date");
+    const endDateInput = await screen.findByLabelText("End date");
+    const decimalsInput = await screen.findByLabelText("Decimals");
+    const generateButton = await screen.findByTestId("generate-btn");
+
+    fireEvent.change(titleInput, { target: { value: "Title Example 2" } });
+    fireEvent.change(seriesSelect, { target: { value: "Data series 2" } });
+    fireEvent.change(initialDateInput, { target: { value: "2020-01-01" } });
+    fireEvent.change(endDateInput, { target: { value: "2021-01-01" } });
+    fireEvent.change(decimalsInput, { target: { value: 2 } });
+
+
+    await act(async () => {
+      await user.click(generateButton)
+    });
+
+    const editBtn = screen.getByText("Edit");
+
+    await act(async () => {
+      await user.click(editBtn)
+    });
+
+    const editTitleInput = await screen.findByLabelText("Title");
+
+    fireEvent.change(editTitleInput, { target: { value: "Title Example 3" } });
+
+    const saveBtn = screen.getByText("Save");
+
+    await act(async () => {
+      await user.click(saveBtn)
+    });
+
+    const dataItem = screen.getByText("Title Example 3");
+    expect(dataItem).toBeInTheDocument()
+  });
+
 })
