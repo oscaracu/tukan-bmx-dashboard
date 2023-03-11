@@ -1,4 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event'
+
 import Form from '../form';
 
 describe('Form Component', () => {
@@ -49,10 +52,9 @@ describe('Form Component', () => {
     expect(paragraphElement).toHaveTextContent(props.description);
   });
 
-  it('should render a form element without method and action attributes', () => {
+  it('should render a form element without method attribute', () => {
     expect(formElement).toBeInTheDocument();
     expect(formElement).not.toHaveAttribute('method');
-    expect(formElement).not.toHaveAttribute('action');
   });
 
   it('should render an input element with label "Title" and id "title"', () => {
@@ -184,16 +186,26 @@ describe('Form Component', () => {
   });
 
 
-  it('should render GraphOptions component when "Graph" radio button is selected', () => {
+  it('should render GraphOptions component when "Graph" radio button is selected', async () => {
     const graphRadio = screen.getByLabelText('Graph');
-    fireEvent.click(graphRadio);
+    const user = userEvent.setup();
+
+    await act(async () => {
+
+      await user.click(graphRadio);
+
+    });
 
     expect(formElement).toContainElement(screen.getByTestId('graph-options-fieldset'));
   });
 
-  it('should render TableOptions component when "Table" radio button is selected', () => {
+  it('should render TableOptions component when "Table" radio button is selected', async () => {
     const tableRadio = screen.getByLabelText('Table');
-    fireEvent.click(tableRadio);
+    const user = userEvent.setup();
+
+    await act(async () => {
+      await user.click(tableRadio)
+    });
 
     expect(formElement).toContainElement(screen.getByTestId('table-options-fieldset'));
   });
@@ -224,9 +236,14 @@ describe('Form Component', () => {
     expect(generateButton).toHaveAttribute("type", "submit");
   });
 
-  it('button "Generate" should call Form submitHandle function on mouse click ', () => {
+  it('button "Generate" should call Form submitHandle function on mouse click ', async () => {
     const generateButton = screen.getByTestId("generate-btn");
-    fireEvent.click(generateButton);
+    const user = userEvent.setup();
+
+    await act(async () => {
+
+      await user.click(generateButton);
+    })
 
     expect(props.submitHandle).toHaveBeenCalled();
   });

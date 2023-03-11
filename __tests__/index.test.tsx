@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Home from '@/pages/index'
+import { act } from 'react-dom/test-utils';
 
 describe('Home Component', () => {
 
@@ -46,19 +48,19 @@ describe('Home Component', () => {
 
   });
 
-  it('should render Form component into Modal Component when "Add new" botton is pressed', () => {
+  it('should render Form component into Modal Component when "Add new" botton is pressed', async () => {
 
     const btnElement = screen.getByTestId("add-btn");
 
     fireEvent.click(btnElement);
 
-    const formElement = screen.getByTestId("form");
+    const formElement = await screen.findByTestId("form");
 
     expect(formElement).toBeInTheDocument();
 
   });
 
-  it('should unmount Modal component when Form "Cancel" button is pressed', () => {
+  it('should unmount Modal component when Form "Cancel" button is pressed', async () => {
 
     const btnElement = screen.getByTestId("add-btn");
 
@@ -66,7 +68,7 @@ describe('Home Component', () => {
 
     const modalComponent = screen.getByTestId("modal");
 
-    const cancelButton = screen.getByTestId("cancel-btn");
+    const cancelButton = await screen.findByTestId("cancel-btn");
 
     fireEvent.click(cancelButton);
 
@@ -74,43 +76,60 @@ describe('Home Component', () => {
 
   });
 
-  it('should render a new Data item with data from the Form when "Generate" button is pressed', () => {
+  it('should render a new Data item with data from the Form when "Generate" button is pressed', async () => {
 
     const addNewButton = screen.getByTestId("add-btn");
+    const user = userEvent.setup();
 
-    fireEvent.click(addNewButton);
+    await act(async () => {
+      await user.click(addNewButton);
+    });
 
-    const titleInput = screen.getByLabelText("Title");
-    const seriesSelect = screen.getByTestId("series-select");
-    const initialDateInput = screen.getByLabelText("Initial date");
-    const endDateInput = screen.getByLabelText("End date");
-    const decimalsInput = screen.getByLabelText("Decimals");
-    const generateButton = screen.getByTestId("generate-btn");
+
+    const titleInput = await screen.findByLabelText("Title");
+    const seriesSelect = await screen.findByTestId("series-select");
+    const initialDateInput = await screen.findByLabelText("Initial date");
+    const endDateInput = await screen.findByLabelText("End date");
+    const decimalsInput = await screen.findByLabelText("Decimals");
+    const generateButton = await screen.findByTestId("generate-btn");
 
     fireEvent.change(titleInput, { target: { value: "Title Example 1" } });
     fireEvent.change(seriesSelect, { target: { value: "Data series 2" } });
     fireEvent.change(initialDateInput, { target: { value: "2020-01-01" } });
     fireEvent.change(endDateInput, { target: { value: "2021-01-01" } });
     fireEvent.change(decimalsInput, { target: { value: 2 } });
-    fireEvent.click(generateButton);
+
+
+    await act(async () => {
+      await user.click(generateButton)
+    });
+
 
     const dataItem = screen.getByText("Title Example 1");
 
-    expect(dataItem).toBeInTheDocument();
+    expect(dataItem).toBeInTheDocument()
+
 
   });
 
-  it('should unmount Modal component when Form "Generate" button is pressed', () => {
+  it('should unmount Modal component when Form "Generate" button is pressed', async () => {
 
     const btnElement = screen.getByTestId("add-btn");
+    const user = userEvent.setup();
 
-    fireEvent.click(btnElement);
+    await act(async () => {
+      await user.click(btnElement)
+    });
+
 
     const modalComponent = screen.getByTestId("modal");
 
-    const generateButton = screen.getByTestId("generate-btn");
+    const generateButton = await screen.findByTestId("generate-btn");
 
-    fireEvent.click(generateButton);
+    await act(async () => {
+      await user.click(generateButton)
+    });
+
 
     expect(modalComponent).not.toBeInTheDocument();
 

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { Formik } from "formik";
 import GraphOptions from "../graphOptions";
 
 describe('Graph Options form fields', () => {
@@ -13,7 +14,17 @@ describe('Graph Options form fields', () => {
     }
 
     beforeEach(() => {
-        const { container: renderContainer } = render(<GraphOptions {...props} />);
+
+        const { container: renderContainer } = render(
+
+            <Formik initialValues={{ decimals: "", dateFormat: "" }} onSubmit={() => { jest.fn() }}>
+
+                <GraphOptions {...props} />
+
+            </Formik>
+
+        );
+
         container = renderContainer;
     });
 

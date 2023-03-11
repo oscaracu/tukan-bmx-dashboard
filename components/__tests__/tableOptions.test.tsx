@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { Formik } from "formik";
 import TableOptions from "../tableOptions";
 
 describe("Table Options form fields", () => {
@@ -13,7 +14,15 @@ describe("Table Options form fields", () => {
     }
 
     beforeEach(() => {
-        const { container: renderContainer } = render(<TableOptions {...props} />);
+        const { container: renderContainer } = render(
+
+            <Formik initialValues={{ decimals: "", dateFormat: "" }} onSubmit={() => { jest.fn() }}>
+
+                <TableOptions {...props} />
+
+            </Formik>
+
+        );
         container = renderContainer;
     })
 
