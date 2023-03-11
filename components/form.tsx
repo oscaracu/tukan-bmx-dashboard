@@ -30,7 +30,7 @@ function Form({ ...props }) {
         color: "#27ae60",
     };
 
-    const [visualizationType, setVisualizationType] = useState(0);
+    const [visualizationType, setVisualizationType] = useState(formInitialValues.visualizationType);
 
     const seriesOptions = props.seriesOptions.map(
         (option: selectOptions, index: number) => (
@@ -42,7 +42,7 @@ function Form({ ...props }) {
 
     let extraOptions;
 
-    if (visualizationType === 0) {
+    if (visualizationType === "table") {
         extraOptions = <TableOptions formatOptions={props.formatOptions} />;
     } else {
         extraOptions = <GraphOptions typeOptions={props.typeOptions} />;
@@ -88,7 +88,7 @@ function Form({ ...props }) {
                             name="visualizationType"
                             id="table"
                             value="table"
-                            onClick={() => setVisualizationType(0)}
+                            onClick={() => setVisualizationType("table")}
                         />
                         <label htmlFor="table">Table</label>
                         <Field
@@ -96,7 +96,7 @@ function Form({ ...props }) {
                             name="visualizationType"
                             id="graph"
                             value="graph"
-                            onClick={() => setVisualizationType(1)}
+                            onClick={() => setVisualizationType("graph")}
                         />
                         <label htmlFor="graph">Graph</label>
                     </fieldset>
