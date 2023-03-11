@@ -6,14 +6,16 @@ import SystemDescription from "@/components/systemDescription";
 import { FormValues } from "models/FormValues";
 import { useState } from "react";
 
-export default function Home() {
+interface SerieValues {
+  variable: string;
+  display_name: string;
+  display_name_en: string;
+  unit_id: string
+}
 
+export default function Home({ ...props }) {
 
-  const seriesOptions = [
-    { value: "series1", label: "Data series 1" },
-    { value: "series2", label: "Data series 2" },
-    { value: "series3", label: "Data series 3" },
-  ];
+  const seriesOptions = props.seriesCatalog ? props.seriesCatalog.map((element: SerieValues) => { return { value: element.variable, label: element.display_name_en, label_es: element.display_name } }) : [];
 
   const typeOptions = [
     { value: "type1", label: "Graph type 1" },
@@ -56,6 +58,10 @@ export default function Home() {
         const itemIndex = dataItems.findIndex((item: FormValues) => item.id === id);
 
         function updateItem(data: FormValues) {
+
+          setModal((oldValues) => {
+            return { ...oldValues, isActive: false };
+          });
 
           setDataItems(dataItems.map((element, index) => {
 
@@ -144,4 +150,21 @@ export default function Home() {
       {modal.isActive ? <Modal childComponent={modal.component} /> : null}
     </div>
   );
+}
+
+export async function getStaticProps() {
+
+  const res = await fetch('https://5i8qcjp333.execute-api.us-east-1.amazonaws.com/dev/series/', {
+    headers: {
+      "Authorization": `${process.env.API_TOKENOFTUKAN}`
+    }
+  })
+  const json = await res.json();
+  const seriesCatalog = json.data;
+
+  return {
+    props: {
+      seriesCatalog,
+    },
+  }
 }
