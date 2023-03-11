@@ -12,30 +12,36 @@ import {
     FieldProps,
 } from "formik";
 import { FormValues } from "../models/FormValues";
-import uniqid from 'uniqid';
+import uniqid from "uniqid";
 
 function Form({ ...props }) {
+    const formInitialValues: FormValues = props.data
+        ? props.data
+        : {
+            id: uniqid(),
+            title: "",
+            language: "english",
+            series: "",
+            visualizationType: "table",
+            initDate: "",
+            endDate: "",
+            decimals: 0,
+            dateFormat: "",
+            graphType: "",
+            color: "#27ae60",
+        };
 
-    const formInitialValues: FormValues = props.data ? props.data : {
-        id: uniqid(),
-        title: "",
-        language: "english",
-        series: "",
-        visualizationType: "table",
-        initDate: "",
-        endDate: "",
-        decimals: 0,
-        dateFormat: "",
-        graphType: "",
-        color: "#27ae60",
-    };
-
-    const [visualizationType, setVisualizationType] = useState(formInitialValues.visualizationType);
+    const [visualizationType, setVisualizationType] = useState(
+        formInitialValues.visualizationType
+    );
+    const [currentLanguage, setCurrentLanguage] = useState(
+        formInitialValues.language
+    );
 
     const seriesOptions = props.seriesOptions.map(
         (option: selectOptions, index: number) => (
             <option key={index} value={option.value}>
-                {option.label}
+                {currentLanguage === "english" ? option.label : option.label_es}
             </option>
         )
     );
@@ -48,7 +54,6 @@ function Form({ ...props }) {
         extraOptions = <GraphOptions typeOptions={props.typeOptions} />;
     }
 
-
     return (
         <>
             <h1>{props.formTitle}</h1>
@@ -58,27 +63,25 @@ function Form({ ...props }) {
                 initialValues={formInitialValues}
                 onSubmit={(values) => {
                     props.submitHandle(values);
-
                 }}
             >
-
                 <FormikForm data-testid="form">
                     <label htmlFor="title">Title</label>
                     <Field type="text" name="title" id="title" />
                     <fieldset data-testid="language-fieldset">
                         <legend>Language</legend>
-                        <Field
-                            type="radio"
-                            name="language"
-                            id="english"
-                            value="english"
-                        />
+                        <Field type="radio" name="language" id="english" value="english" onClick={() => setCurrentLanguage("english")} />
                         <label htmlFor="english">English</label>
-                        <Field type="radio" name="language" id="spanish" value="spanish" />
+                        <Field type="radio" name="language" id="spanish" value="spanish" onClick={() => setCurrentLanguage("spanish")} />
                         <label htmlFor="spanish">Spanish</label>
                     </fieldset>
                     <label htmlFor="series">Choose a data series</label>
-                    <Field as="select" name="series" id="series" data-testid="series-select">
+                    <Field
+                        as="select"
+                        name="series"
+                        id="series"
+                        data-testid="series-select"
+                    >
                         {seriesOptions}
                     </Field>
                     <fieldset data-testid="visualization-fieldset">
@@ -111,10 +114,12 @@ function Form({ ...props }) {
                         testId="cancel-btn"
                         btnType="button"
                     />
-                    {props.data ? <Button text="Save" testId="save-btn" btnType="submit" /> : <Button text="Generate" testId="generate-btn" btnType="submit" />}
-
+                    {props.data ? (
+                        <Button text="Save" testId="save-btn" btnType="submit" />
+                    ) : (
+                        <Button text="Generate" testId="generate-btn" btnType="submit" />
+                    )}
                 </FormikForm>
-
             </Formik>
         </>
     );
