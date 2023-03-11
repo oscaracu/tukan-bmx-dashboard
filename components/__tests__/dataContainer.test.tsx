@@ -8,15 +8,15 @@ describe('DataContainer Component', () => {
         clickHandle: jest.fn(),
         dataItems: [
             {
-                seriesTitle: "Visualization Series Title 1",
+                title: "Visualization Series Title 1",
                 data: "Series Data received by props 1",
             },
             {
-                seriesTitle: "Visualization Series Title 2",
+                title: "Visualization Series Title 2",
                 data: "Series Data received by props 2",
             },
             {
-                seriesTitle: "Visualization Series Title 3",
+                title: "Visualization Series Title 3",
                 data: "Series Data received by props 3",
             },
 
@@ -102,7 +102,7 @@ describe('DataContainer Component', () => {
     it('should render as many DataItem components as data items received by props', () => {
 
         props.dataItems.forEach(item => {
-            const headingElement = screen.getByText(item.seriesTitle);
+            const headingElement = screen.getByText(item.title);
 
             expect(headingElement).toBeInTheDocument();
         })

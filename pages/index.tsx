@@ -3,6 +3,7 @@ import Form from "@/components/form";
 import Header from "@/components/header";
 import Modal from "@/components/modal";
 import SystemDescription from "@/components/systemDescription";
+import { FormValues } from "models/FormValues";
 import { useState } from "react";
 
 export default function Home() {
@@ -10,9 +11,7 @@ export default function Home() {
     isActive: false,
     component: <SystemDescription />,
   });
-  const [dataItems, setDataItems] = useState([
-    { seriesTitle: "Example Title", data: "Series Data" },
-  ]);
+  const [dataItems, setDataItems] = useState<FormValues[]>([]);
 
   const dataActions = [
     {

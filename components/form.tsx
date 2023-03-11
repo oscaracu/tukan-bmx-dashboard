@@ -11,22 +11,11 @@ import {
     Field,
     FieldProps,
 } from "formik";
-
-interface FormValues {
-    title: string;
-    language: string;
-    series: string;
-    visualizationType: string;
-    initDate: string;
-    endDate: string;
-    decimals: number;
-    dateFormat: string;
-    graphType: string;
-    color: string;
-}
+import { FormValues } from "../models/FormValues";
 
 function Form({ ...props }) {
     const formInitialValues: FormValues = {
+        id: "",
         title: "",
         language: "english",
         series: "",
@@ -74,10 +63,7 @@ function Form({ ...props }) {
                 initialValues={formInitialValues}
                 onSubmit={(values) => {
                     // console.log({ values });
-                    props.submitHandle({
-                        seriesTitle: values.title,
-                        data: "Series Data 2",
-                    });
+                    props.submitHandle(values);
 
                 }}
             >
