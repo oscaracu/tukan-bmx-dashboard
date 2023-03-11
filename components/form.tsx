@@ -15,13 +15,16 @@ import { FormValues } from "../models/FormValues";
 import uniqid from "uniqid";
 
 function Form({ ...props }) {
+
+    const firstOption = props.seriesOptions[0] ? props.seriesOptions[0].value : "";
+
     const formInitialValues: FormValues = props.data
         ? props.data
         : {
             id: uniqid(),
             title: "",
             language: "english",
-            series: "",
+            series: firstOption,
             visualizationType: "table",
             initDate: "",
             endDate: "",
