@@ -12,10 +12,11 @@ import {
     FieldProps,
 } from "formik";
 import { FormValues } from "../models/FormValues";
+import uniqid from 'uniqid';
 
 function Form({ ...props }) {
     const formInitialValues: FormValues = {
-        id: "",
+        id: uniqid(),
         title: "",
         language: "english",
         series: "",

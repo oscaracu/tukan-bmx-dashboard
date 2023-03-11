@@ -7,7 +7,7 @@ function DataItem({ ...props }) {
         <div data-testid="data-item">
             <h2 data-testid="series-title">{props.seriesTitle}</h2>
             <DataDisplay data={props.data} />
-            <ActionButtons dataActions={props.dataActions} />
+            <ActionButtons dataActions={props.dataActions} dataId={props.data.id} />
 
         </div>
     );

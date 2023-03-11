@@ -36,7 +36,9 @@ export default function Home() {
       testId: "delete-action",
       text: "Delete",
       btnType: "button",
-      clickHandle: () => console.log("Delete"),
+      clickHandle: (id: string) => {
+        setDataItems(oldvalues => { return oldvalues.filter((element) => element.id !== id) })
+      },
     },
     {
       testId: "download-action",

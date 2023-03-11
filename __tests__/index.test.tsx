@@ -135,4 +135,42 @@ describe('Home Component', () => {
 
   });
 
+  it('should remove a Data item when Delete button is pressed ', async () => {
+    const addNewButton = screen.getByTestId("add-btn");
+    const user = userEvent.setup();
+
+    await act(async () => {
+      await user.click(addNewButton);
+    });
+
+
+    const titleInput = await screen.findByLabelText("Title");
+    const seriesSelect = await screen.findByTestId("series-select");
+    const initialDateInput = await screen.findByLabelText("Initial date");
+    const endDateInput = await screen.findByLabelText("End date");
+    const decimalsInput = await screen.findByLabelText("Decimals");
+    const generateButton = await screen.findByTestId("generate-btn");
+
+    fireEvent.change(titleInput, { target: { value: "Title Example 2" } });
+    fireEvent.change(seriesSelect, { target: { value: "Data series 2" } });
+    fireEvent.change(initialDateInput, { target: { value: "2020-01-01" } });
+    fireEvent.change(endDateInput, { target: { value: "2021-01-01" } });
+    fireEvent.change(decimalsInput, { target: { value: 2 } });
+
+
+    await act(async () => {
+      await user.click(generateButton)
+    });
+
+
+    const dataItem = screen.getByText("Title Example 2");
+    const deleteBtn = screen.getByText("Delete");
+
+    await act(async () => {
+      await user.click(deleteBtn)
+    });
+
+    expect(dataItem).not.toBeInTheDocument()
+  });
+
 })
