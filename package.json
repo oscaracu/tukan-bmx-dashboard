@@ -7,13 +7,13 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "test:coverage": "NODE_ENV=test jest --coverage"
-
   },
   "dependencies": {
     "formik": "^2.2.9",
     "next": "latest",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-icons": "^4.8.0",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {

@@ -140,7 +140,7 @@ export default function Home({ ...props }) {
   };
 
   return (
-    <div>
+    <div className="m-3">
       <Header />
       <DataCointainer
         dataItems={dataItems}
