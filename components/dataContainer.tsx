@@ -17,7 +17,7 @@ function DataCointainer({ ...props }) {
     return (
         <section data-testid="data-container">
             <div data-testid="add-item">
-                <Button btnType="button" clickHandle={props.clickHandle} testId="add-btn" text="Add new" />
+                <Button btnType="button" clickHandle={props.clickHandle} testId="add-btn">Add new</Button>
             </div>
             {dataItems}
 

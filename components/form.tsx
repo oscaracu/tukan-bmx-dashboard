@@ -113,14 +113,13 @@ function Form({ ...props }) {
                     {extraOptions}
                     <Button
                         clickHandle={props.clickHandle}
-                        text="Cancel"
                         testId="cancel-btn"
                         btnType="button"
-                    />
+                    >Cancel</Button>
                     {props.data ? (
-                        <Button text="Save" testId="save-btn" btnType="submit" />
+                        <Button testId="save-btn" btnType="submit">Save</Button>
                     ) : (
-                        <Button text="Generate" testId="generate-btn" btnType="submit" />
+                        <Button testId="generate-btn" btnType="submit">Generate</Button>
                     )}
                 </FormikForm>
             </Formik>

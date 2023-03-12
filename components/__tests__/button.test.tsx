@@ -11,7 +11,7 @@ describe('Button Component', () => {
   }
 
   beforeEach(() => {
-    const { container: renderContainer } = render(<Button {...props}/>);
+    const { container: renderContainer } = render(<Button {...props}>{props.text}</Button>);
     container = renderContainer;
     buttonElement = screen.getByRole('button');
   });

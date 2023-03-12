@@ -5,9 +5,15 @@ function Header({ ...props }) {
         <header data-testid="app-header">
 
             <h1 data-testid="app-title">Visualizations</h1>
-            <Button btnType="button" text="Download all" testId="download-btn" clickHandle={props.clickHandle} />
-            <Button btnType="button" text="Grid view" testId="grid-btn" clickHandle={props.clickHandle} />
-            <Button btnType="button" text="List view" testId="list-btn" clickHandle={props.clickHandle} />
+            <Button btnType="button" testId="download-btn" clickHandle={props.clickHandle}>
+                <p>Download all</p>
+            </Button>
+            <Button btnType="button" testId="grid-btn" clickHandle={props.clickHandle}>
+                <p>Grid view</p>
+            </Button>
+            <Button btnType="button" testId="list-btn" clickHandle={props.clickHandle}>
+                <p>List view</p>
+            </Button>
 
         </header>);
 }
