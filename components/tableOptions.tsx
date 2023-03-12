@@ -22,17 +22,26 @@ function TableOptions({ ...props }) {
     );
 
     return (
-        <>
-            <fieldset data-testid="table-options-fieldset">
-                <legend>Table options</legend>
-                <label htmlFor="decimals">Decimals</label>
-                <Field type="number" name="decimals" id="decimals" />
-                <label htmlFor="dateFormat">Date format</label>
-                <Field as="select" name="dateFormat" id="dateFormat" data-testid="dateFormat">
-                    {formatOptions}
-                </Field>
-            </fieldset>
-        </>
+
+        <fieldset data-testid="table-options-fieldset" className="p-1 mt-1">
+            <legend className="hidden">Table options</legend>
+            <div className="flex flex-row gap-2 justify-center text-center">
+                <div className="text-center">
+                    <label htmlFor="dateFormat" className="block">Date format</label>
+                    <Field as="select" name="dateFormat" id="dateFormat" data-testid="dateFormat" className="block max-w-[130px] p-2 overflow-hidden overflow-ellipsis">
+                        {formatOptions}
+                    </Field>
+
+                </div>
+                <div className="text-center">
+                    <label htmlFor="decimals" className="block">Decimals</label>
+                    <Field type="number" name="decimals" id="decimals" className="block max-w-[130px] p-2" />
+
+                </div>
+
+            </div>
+        </fieldset>
+
     );
 }
 

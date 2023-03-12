@@ -25,9 +25,9 @@ export default function Home({ ...props }) {
   ];
 
   const formatOptions = [
-    { value: "fotmat1", label: "Format 1" },
-    { value: "fotmat2", label: "Format 2" },
-    { value: "fotmat3", label: "Format 3" },
+    { value: "fotmat1", label: "Example Format 1" },
+    { value: "fotmat2", label: "Example Format 2" },
+    { value: "fotmat3", label: "Example Format 3" },
   ];
 
 
@@ -85,6 +85,8 @@ export default function Home({ ...props }) {
           isActive: true,
           component: (
             <Form
+              formTitle="Update Form"
+              description="A esse aperiam sequi culpa voluptas."
               seriesOptions={seriesOptions}
               formatOptions={formatOptions}
               typeOptions={typeOptions}
@@ -120,6 +122,8 @@ export default function Home({ ...props }) {
       isActive: true,
       component: (
         <Form
+          formTitle="Create Form"
+          description="A esse aperiam sequi culpa voluptas."
           seriesOptions={seriesOptions}
           formatOptions={formatOptions}
           typeOptions={typeOptions}
@@ -146,7 +150,7 @@ export default function Home({ ...props }) {
   };
 
   return (
-    <div className="m-3">
+    <div className="m-3 static">
       <Header />
       <DataCointainer
         dataItems={dataItems}
