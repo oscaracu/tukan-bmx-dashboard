@@ -5,6 +5,7 @@ import Modal from "@/components/modal";
 import SystemDescription from "@/components/systemDescription";
 import { FormValues } from "models/FormValues";
 import { useState } from "react";
+import { BsArrowsMove, BsEye, BsPencilSquare, BsTrash, BsDownload } from "react-icons/bs";
 
 interface SerieValues {
   variable: string;
@@ -42,17 +43,20 @@ export default function Home({ ...props }) {
       text: "Move",
       btnType: "button",
       clickHandle: () => console.log("Move"),
+      icon: <BsArrowsMove />
     },
     {
       testId: "view-action",
       text: "View",
       btnType: "button",
       clickHandle: () => console.log("View"),
+      icon: <BsEye />
     },
     {
       testId: "edit-action",
       text: "Edit",
       btnType: "button",
+      icon: <BsPencilSquare />,
       clickHandle: (id: string) => {
 
         const itemIndex = dataItems.findIndex((item: FormValues) => item.id === id);
@@ -97,6 +101,7 @@ export default function Home({ ...props }) {
       testId: "delete-action",
       text: "Delete",
       btnType: "button",
+      icon: <BsTrash />,
       clickHandle: (id: string) => {
         setDataItems(oldvalues => { return oldvalues.filter((element) => element.id !== id) })
       },
@@ -106,6 +111,7 @@ export default function Home({ ...props }) {
       text: "Download",
       btnType: "button",
       clickHandle: () => console.log("Download"),
+      icon: <BsDownload />
     },
   ];
 

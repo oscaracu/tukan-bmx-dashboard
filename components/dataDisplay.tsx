@@ -1,7 +1,7 @@
 function DataDisplay({ ...props }) {
     return (
         <div data-testid="data-display">
-            {JSON.stringify(props.data)}
+            <p className="hidden">{JSON.stringify(props.data)}</p>
         </div>);
 }
 
