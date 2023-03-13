@@ -4,7 +4,9 @@ import DataDisplay from "../dataDisplay";
 describe('DataDisplay Component', () => {
     let container: HTMLElement;
     const props = {
-        data: "Series Data received by props"
+        data: {
+            series: "Series Data received by props"
+        }
     }
 
     beforeEach(() => {
@@ -25,6 +27,6 @@ describe('DataDisplay Component', () => {
     it('should render a data passed by props', () => {
         const divElement = screen.getByTestId("data-display");
 
-        expect(divElement).toHaveTextContent(props.data)
+        expect(divElement).toHaveTextContent(props.data.series)
     });
 });

@@ -6,7 +6,7 @@ describe('DataItem Component', () => {
 
     const props = {
         seriesTitle: "Visualization Series Title",
-        data: "Series Data received by props",
+        data: { series: "Series Data received by props" },
         dataActions: [
             {
                 testId: "move-action",
@@ -75,7 +75,7 @@ describe('DataItem Component', () => {
         const displayComponent = screen.getByTestId("data-display");
 
         expect(displayComponent).toBeInTheDocument();
-        expect(displayComponent).toHaveTextContent(props.data);
+        expect(displayComponent).toHaveTextContent(props.data.series);
     });
 
     it('should render the ActionButons component with data received by props', () => {

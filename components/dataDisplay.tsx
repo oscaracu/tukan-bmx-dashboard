@@ -8,27 +8,33 @@ function DataDisplay({ ...props }) {
         displayData =
             <div className=" w-full max-w-xs overflow-scroll max-h-40">
                 <table className="table-auto w-full bg-white text-center border-2">
-                    <tr>
-                        <th className="border-2 border-slate-400 border-solid bg-sky-100">Fecha</th>
-                        <th className="border-2 border-slate-400 border-solid">Dato</th>
-                    </tr>
-                    {props.data.dataQuery.datos.map((dato: { fecha: string; dato: string; }, index: number) =>
+                    <thead>
                         <tr>
-                            <td className="border-2 border-slate-400 border-solid bg-sky-100">{dato.fecha}</td>
-                            <td className="border-2 border-slate-400 border-solid">{dato.dato}</td>
+                            <th className="border-2 border-slate-400 border-solid bg-sky-100">Fecha</th>
+                            <th className="border-2 border-slate-400 border-solid">Dato</th>
                         </tr>
-                    )}
+                    </thead>
+                    <tbody>
+
+                        {props.data.dataQuery.datos.map((dato: { fecha: string; dato: string; }, index: number) =>
+                            <tr key={index}>
+                                <td className="border-2 border-slate-400 border-solid bg-sky-100">{dato.fecha}</td>
+                                <td className="border-2 border-slate-400 border-solid">{dato.dato}</td>
+                            </tr>
+                        )}
+                    </tbody>
                 </table>
             </div>;
 
     } else {
-        console.log("graph");
+
 
     }
 
     return (
         <div data-testid="data-display">
             {displayData}
+            <p className="hidden">{props.data.series}</p>
         </div>);
 }
 
