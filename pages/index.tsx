@@ -38,20 +38,20 @@ export default function Home({ ...props }) {
   const [dataItems, setDataItems] = useState<FormValues[]>([]);
 
   const dataActions = [
-    {
-      testId: "move-action",
-      text: "Move",
-      btnType: "button",
-      clickHandle: () => console.log("Move"),
-      icon: <BsArrowsMove />
-    },
-    {
-      testId: "view-action",
-      text: "View",
-      btnType: "button",
-      clickHandle: () => console.log("View"),
-      icon: <BsEye />
-    },
+    // {
+    //   testId: "move-action",
+    //   text: "Move",
+    //   btnType: "button",
+    //   clickHandle: () => console.log("Move"),
+    //   icon: <BsArrowsMove />
+    // },
+    // {
+    //   testId: "view-action",
+    //   text: "View",
+    //   btnType: "button",
+    //   clickHandle: () => console.log("View"),
+    //   icon: <BsEye />
+    // },
     {
       testId: "edit-action",
       text: "Edit",
@@ -113,13 +113,13 @@ export default function Home({ ...props }) {
         setDataItems(oldvalues => { return oldvalues.filter((element) => element.id !== id) })
       },
     },
-    {
-      testId: "download-action",
-      text: "Download",
-      btnType: "button",
-      clickHandle: () => console.log("Download"),
-      icon: <BsDownload />
-    },
+    // {
+    //   testId: "download-action",
+    //   text: "Download",
+    //   btnType: "button",
+    //   clickHandle: () => console.log("Download"),
+    //   icon: <BsDownload />
+    // },
   ];
 
   const addNewBtnClickHandle = () => {

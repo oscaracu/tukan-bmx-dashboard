@@ -6,7 +6,7 @@ const paragraphStyle = "hidden";
 
 function Header({ ...props }) {
     return (
-        <header data-testid="app-header" className="flex flex-row gap-2 items-center justify-between mb-10">
+        <header data-testid="app-header" className="flex flex-row gap-2 items-center justify-between mb-10 md:w-10/12 md:mx-auto">
 
             <h1 data-testid="app-title" className="text-2xl">Visualizations</h1>
             <div className=" flex flex-row gap-3 items-center">

@@ -29,7 +29,7 @@ function GraphOptions({ ...props }) {
                 <div className="flex flex-row justify-center text-center gap-2">
                     <div className="min-w-[120px] text-center">
                         <label htmlFor="graphType" className="block">Graph type</label>
-                        <Field as="select" name="graphType" id="graphType" data-testid="graphType" className="block p-2 overflow-hidden overflow-ellipsis">
+                        <Field as="select" name="graphType" id="graphType" data-testid="graphType" className="block p-2 overflow-hidden overflow-ellipsis" disabled>
                             {typeOptions}
                         </Field>
 

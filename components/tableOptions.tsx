@@ -28,14 +28,14 @@ function TableOptions({ ...props }) {
             <div className="flex flex-row gap-2 justify-center text-center">
                 <div className="text-center">
                     <label htmlFor="dateFormat" className="block">Date format</label>
-                    <Field as="select" name="dateFormat" id="dateFormat" data-testid="dateFormat" className="block max-w-[130px] p-2 overflow-hidden overflow-ellipsis">
+                    <Field as="select" name="dateFormat" id="dateFormat" data-testid="dateFormat" className="block max-w-[130px] p-2 overflow-hidden overflow-ellipsis" disabled>
                         {formatOptions}
                     </Field>
 
                 </div>
                 <div className="text-center">
                     <label htmlFor="decimals" className="block">Decimals</label>
-                    <Field type="number" name="decimals" id="decimals" className="block max-w-[130px] p-2" />
+                    <Field type="number" name="decimals" id="decimals" className="block max-w-[130px] p-2" disabled />
 
                 </div>
 
