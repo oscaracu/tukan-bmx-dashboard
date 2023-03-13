@@ -1,4 +1,4 @@
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from "react";
+import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
 
 function DataDisplay({ ...props }) {
 
@@ -28,6 +28,19 @@ function DataDisplay({ ...props }) {
 
     } else {
 
+        const graphData = props.data ? props.data.dataQuery.datos.map((dato: { fecha: any; dato: any; }) => { return { name: dato.fecha, value: parseFloat(dato.dato.split(",").join("").toString()) } }) : [];
+
+        displayData =
+            <div>
+                <BarChart width={300} height={200} data={graphData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="value" fill={props.data.color} />
+                </BarChart>
+            </div>
 
     }
 

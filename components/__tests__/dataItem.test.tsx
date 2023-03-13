@@ -6,7 +6,12 @@ describe('DataItem Component', () => {
 
     const props = {
         seriesTitle: "Visualization Series Title",
-        data: { series: "Series Data received by props" },
+        data: {
+            series: "Series Data received by props",
+            dataQuery: {
+                datos: [{ fecha: "nombre", dato: "1,700.00" }]
+            }
+        },
         dataActions: [
             {
                 testId: "move-action",

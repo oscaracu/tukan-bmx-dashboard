@@ -5,8 +5,11 @@ describe('DataDisplay Component', () => {
     let container: HTMLElement;
     const props = {
         data: {
-            series: "Series Data received by props"
-        }
+            series: "Series Data received by props",
+            dataQuery: {
+                datos: [{ fecha: "nombre", dato: "1,700.00" }]
+            }
+        },
     }
 
     beforeEach(() => {

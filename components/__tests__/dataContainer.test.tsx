@@ -10,14 +10,25 @@ describe('DataContainer Component', () => {
             {
                 title: "Visualization Series Title 1",
                 data: "Series Data received by props 1",
+                dataQuery: {
+                    datos: [{ fecha: "nombre", dato: "1,700.00" }]
+                }
             },
             {
                 title: "Visualization Series Title 2",
                 data: "Series Data received by props 2",
+                dataQuery: {
+                    datos: [{ fecha: "nombre", dato: "1,700.00" }]
+                }
+
             },
             {
                 title: "Visualization Series Title 3",
                 data: "Series Data received by props 3",
+                dataQuery: {
+                    datos: [{ fecha: "nombre", dato: "1,700.00" }]
+                }
+
             },
 
         ],
