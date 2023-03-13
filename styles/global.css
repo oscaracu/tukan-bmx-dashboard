@@ -5,3 +5,7 @@
 html {
     background-color: #f1f5f9;
 }
+
+div {
+    border: 1px solid lightgray;
+}

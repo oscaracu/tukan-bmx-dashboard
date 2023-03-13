@@ -28,7 +28,7 @@ function Form({ ...props }) {
         : {
             id: uniqid(),
             title: "",
-            language: "english",
+            language: "en",
             series: firstOption,
             visualizationType: "table",
             initDate: "",
@@ -49,7 +49,7 @@ function Form({ ...props }) {
     const seriesOptions = props.seriesOptions.map(
         (option: selectOptions, index: number) => (
             <option key={index} value={option.value} className="whitespace-nowrap overflow-hidden overflow-ellipsis w-full">
-                {currentLanguage === "english" ? option.label : option.label_es}
+                {currentLanguage === "en" ? option.label : option.label_es}
             </option>
         )
     );
@@ -69,19 +69,20 @@ function Form({ ...props }) {
 
             <Formik
                 initialValues={formInitialValues}
-                onSubmit={(values) => {
+                onSubmit={async (values) => {
+
                     props.submitHandle(values);
                 }}
             >
                 <FormikForm data-testid="form">
                     <label htmlFor="title" className="hidden">Title</label>
-                    <Field type="text" name="title" id="title" placeholder="Title" className="w-full p-2" />
+                    <Field type="text" name="title" id="title" placeholder="Title" className="w-full p-2" required />
                     <fieldset data-testid="language-fieldset" className={fieldsetStyles}>
                         <legend className={legendStyles}>Language</legend>
                         <div className={radioContainerStyles}>
-                            <Field type="radio" name="language" id="english" value="english" onClick={() => setCurrentLanguage("english")} />
+                            <Field type="radio" name="language" id="english" value="en" onClick={() => setCurrentLanguage("en")} />
                             <label htmlFor="english">English</label>
-                            <Field type="radio" name="language" id="spanish" value="spanish" onClick={() => setCurrentLanguage("spanish")} />
+                            <Field type="radio" name="language" id="spanish" value="es" onClick={() => setCurrentLanguage("es")} />
                             <label htmlFor="spanish">Spanish</label>
                         </div>
                     </fieldset>

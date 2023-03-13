@@ -10,7 +10,7 @@ function DataCointainer({ ...props }) {
     if (!props.dataItems) {
         dataItems = null;
     } else {
-        dataItems = props.dataItems.map((item: FormValues, index: number) => <DataItem key={index} seriesTitle={item.title} data={item} dataActions={props.dataActions} />)
+        dataItems = props.dataItems.map((item: FormValues, index: number) => <DataItem key={index} seriesTitle={item.title} data={item} dataActions={props.dataActions} fetchFunction={props.fetchFunction} />)
     }
 
 

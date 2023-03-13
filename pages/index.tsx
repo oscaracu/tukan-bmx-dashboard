@@ -61,7 +61,12 @@ export default function Home({ ...props }) {
 
         const itemIndex = dataItems.findIndex((item: FormValues) => item.id === id);
 
-        function updateItem(data: FormValues) {
+        async function updateItem(data: any) {
+
+          const newItem = { ...data };
+
+          newItem.dataQuery = await fetchFunction(data);
+
 
           setModal((oldValues) => {
             return { ...oldValues, isActive: false };
@@ -71,7 +76,7 @@ export default function Home({ ...props }) {
 
             if (index === itemIndex) {
 
-              return data;
+              return newItem;
 
             }
 
@@ -140,14 +145,37 @@ export default function Home({ ...props }) {
     });
   };
 
-  const formDataHandle = (data: any) => {
+  const formDataHandle = async (data: any) => {
+
+    const newItem = { ...data };
+
+    newItem.dataQuery = await fetchFunction(data);
+
     setDataItems((currentValues) => {
-      return [...currentValues, data];
+      return [...currentValues, newItem];
     });
     setModal((oldValues) => {
       return { ...oldValues, isActive: false };
     });
   };
+
+  const fetchFunction = async (values: any) => {
+
+    const { language, series, initDate, endDate } = values;
+
+    const res = await fetch(`https://5i8qcjp333.execute-api.us-east-1.amazonaws.com/dev/series/${series}/${initDate}/${endDate}?locale=${language}`, {
+      headers: {
+        "Authorization": `${process.env.NEXT_PUBLIC_API_TOKENOFTUKAN}`,
+        "Bmx-Token": `${process.env.NEXT_PUBLIC_API_BMXTOKEN}`
+      }
+    });
+    const json = await res.json();
+
+    const dataQuery = json.bmx.series[0];
+
+    return dataQuery;
+
+  }
 
   return (
     <div className="m-3 static">
@@ -164,9 +192,10 @@ export default function Home({ ...props }) {
 
 export async function getStaticProps() {
 
+
   const res = await fetch('https://5i8qcjp333.execute-api.us-east-1.amazonaws.com/dev/series/', {
     headers: {
-      "Authorization": `${process.env.API_TOKENOFTUKAN}`
+      "Authorization": `${process.env.NEXT_PUBLIC_API_TOKENOFTUKAN}`
     }
   })
   const json = await res.json();

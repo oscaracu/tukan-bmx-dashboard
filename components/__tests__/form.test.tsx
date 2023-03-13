@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event'
-
 import Form from '../form';
 
 describe('Form Component', () => {
@@ -66,13 +65,13 @@ describe('Form Component', () => {
     expect(formElement).toContainElement(inputElement);
   });
 
-  it('should render two input elements of type radio with values "english" and "spanish" and the same name attribute', () => {
+  it('should render two input elements of type radio with values "en" and "es" and the "language" name attribute', () => {
     const languageRadioButtons: any = screen.getAllByRole('radio').filter(radioButton => radioButton.getAttribute('name') === 'language');
     expect(languageRadioButtons.length).toBe(2);
 
     const [englishRadioButton, spanishRadioButton] = languageRadioButtons;
-    expect(englishRadioButton.value).toBe('english');
-    expect(spanishRadioButton.value).toBe('spanish');
+    expect(englishRadioButton.value).toBe('en');
+    expect(spanishRadioButton.value).toBe('es');
 
     const englishLabel = formElement.querySelector(`label[for="${englishRadioButton.id}"]`);
     const spanishLabel = formElement.querySelector(`label[for="${spanishRadioButton.id}"]`);
@@ -237,6 +236,10 @@ describe('Form Component', () => {
   });
 
   it('button "Generate" should call Form submitHandle function on mouse click ', async () => {
+    const titleInput = await screen.findByLabelText("Title");
+    fireEvent.change(titleInput, { target: { value: "Title Example 1" } });
+
+
     const generateButton = screen.getByTestId("generate-btn");
     const user = userEvent.setup();
 
